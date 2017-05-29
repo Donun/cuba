@@ -80,7 +80,10 @@ public class CubaJettyServer {
     }
 
     public void start() {
-        System.setProperty("app.home", System.getProperty("user.dir"));
+        String appHome = System.getProperty("app.home");
+        if (appHome == null || appHome.length() == 0) {
+            System.setProperty("app.home", System.getProperty("user.dir"));
+        }
         try {
             Server server = createServer();
             server.start();
